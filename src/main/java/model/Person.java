@@ -108,4 +108,8 @@ public class Person implements IPerson,Comparable<Person>{
         return PersonDAO.getPersons();
     }
     
+    public static IPerson getPersonById(int id) throws SQLException {
+        return PersonDAO.getPersonById(id);
+    }
+    
 }

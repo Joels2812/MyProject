@@ -22,13 +22,13 @@ public class PersonDAO extends MySqlConfig{
     public static void insertPerson(Person person) throws SQLException{
         try {
             getConnection();
-            String sql = "CALL insert_person(?,?,?,?,?,?)";
+            String sql = "{CALL insert_person(?,?,?,?,?,?)}";
             CallableStatement cs = con.prepareCall(sql);
             cs.setInt("p_id", person.getId());
             cs.setString("p_surname", person.getSurname());
             cs.setString("p_lastname", person.getLastname());
             cs.setString("p_email",person.getEmail());
-            cs.setInt("p_phone", person.getPhoneNumber());
+            cs.setInt("p_phone_number", person.getPhoneNumber());
             cs.setDate("p_borndate", Date.valueOf(person.getBorndate()));
             cs.execute();
         } catch (SQLException e) {
@@ -41,7 +41,7 @@ public class PersonDAO extends MySqlConfig{
     public static void deletePersonById(int id) throws SQLException{
         try {
             getConnection();
-            String sql = "CALL delete_person_id(?)";
+            String sql = "{CALL delete_person_id(?)}";
             CallableStatement cs = con.prepareCall(sql);
             cs.setInt("p_id", id);
             cs.execute();
@@ -55,7 +55,7 @@ public class PersonDAO extends MySqlConfig{
     public static ArrayList<IPerson> getPersons() throws SQLException {
         ArrayList<IPerson> persons = new ArrayList<>();
         getConnection();
-        String sql = "{CALL get_all_persons()}";
+        String sql = "{CALL get_all_persons}";
         CallableStatement cs = con.prepareCall(sql);
         ResultSet rs = cs.executeQuery();
         while(rs.next()){
@@ -65,4 +65,20 @@ public class PersonDAO extends MySqlConfig{
         closeConnection();
         return persons;
     }
+    
+    public static IPerson getPersonById(int id)throws SQLException{
+        IPerson person = null;
+        getConnection();
+        String sql = "{CALL get_person_by_id(?)}";
+        CallableStatement cs = con.prepareCall(sql);
+        cs.setInt("id", id);
+        ResultSet rs = cs.executeQuery();
+        while(rs.next()){
+            IPerson currentPerson = new Person(rs.getInt("id"), rs.getString("surname"), rs.getString("lastname"),rs.getString("email"), rs.getInt("phone_number"), rs.getDate("borndate").toLocalDate());
+            person = currentPerson;
+        }
+        closeConnection();
+        return person;
+    }
+    
 }

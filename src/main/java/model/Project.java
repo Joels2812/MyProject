@@ -1,6 +1,9 @@
 package model;
 
+import dao.ProjectDAO;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -17,6 +20,18 @@ public abstract class Project implements IProject,Comparable<Project>{
     private IPerson manager;
     private ArrayList<IPerson> teamMembers;
     private double acumulatedIncome;
+
+    public Project(String code, String name, double initialCost, LocalDate startDate, double acumulatedIncome) {
+        this.code = code;
+        this.name = name;
+        this.initialCost = initialCost;
+        this.startDate = startDate;
+        this.tasks = new ArrayList<>();
+        this.log = new ArrayList<>();
+        this.manager = null;
+        this.teamMembers = new ArrayList<>();
+        this.acumulatedIncome = acumulatedIncome;
+    }
     
     public Project(String name, double initialCost) {
         this.code = "";
@@ -27,6 +42,17 @@ public abstract class Project implements IProject,Comparable<Project>{
         this.log = new ArrayList<Event>();
         this.teamMembers = new ArrayList<IPerson>();
         this.manager = null;
+        acumulatedIncome=0;
+    }
+    public Project(String name, double initialCost,int manager) {
+        this.code = "";
+        this.name = name;
+        this.initialCost = initialCost;
+        this.startDate = LocalDate.now();
+        this.tasks = new ArrayList<Task>();
+        this.log = new ArrayList<Event>();
+        this.teamMembers = new ArrayList<IPerson>();
+        this.manager = new Person(manager);
         acumulatedIncome=0;
     }
 
@@ -86,11 +112,38 @@ public abstract class Project implements IProject,Comparable<Project>{
     public int compareTo(Project o) {
         return this.getName().compareToIgnoreCase(o.getName());
     }
+
+    @Override
+    public double acumulatedIncome() {
+        return this.acumulatedIncome;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setAcumulatedIncome(double acumulatedIncome) {
+        this.acumulatedIncome = acumulatedIncome;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+   
+    
     private boolean existMember(IPerson member){
         return teamMembers.stream().filter(registeredMember -> registeredMember.getId()==member.getId()).findFirst().isPresent();
     }
-    
-    
+    public static ArrayList<IProject> getAllProjects() throws SQLException{
+        ArrayList<IProject> projects = new ArrayList<>();
+        projects = ProjectDAO.getAllProjects();
+        return projects;
+    }
+
+    @Override
+    public void delete() throws SQLException {
+        ProjectDAO.deleteProjectByCode(code);
+    }
     
     
     

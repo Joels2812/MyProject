@@ -32,6 +32,9 @@
                   <li class="nav-item ">
                     <a class="nav-link" href="MainController?open=persons">Persons</a>
                   </li>
+                  <li class="nav-item ">
+                    <a class="nav-link" href="MainController?open=projects">Projects</a>
+                  </li>
                 </ul>
               </div>
  </nav>

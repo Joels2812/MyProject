@@ -4,7 +4,9 @@
  */
 package model;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -21,4 +23,7 @@ public interface IProject {
     abstract public String getName();
     abstract public double getInitialCost();
     abstract public LocalDate getStartDate();
+    abstract public double acumulatedIncome();
+    abstract public void save() throws SQLException;
+    abstract public void delete() throws SQLException;
 }

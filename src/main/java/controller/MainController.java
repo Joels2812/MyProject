@@ -18,7 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class MainController extends HttpServlet {
     final String PERSONS_PATH = "views/persons.jsp"; 
-    final String INDEX_PATH = "index.jsp"; 
+    final String INDEX_PATH = "index.jsp";
+    final String PROJECTS_PATH = "views/projects.jsp"; 
     
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -38,6 +39,10 @@ public class MainController extends HttpServlet {
         switch (requestAction) {
             case "persons":
                 url_redirect =  PERSONS_PATH;
+                
+                break;
+            case "projects":
+                url_redirect =  PROJECTS_PATH;
                 
                 break;
             default:
