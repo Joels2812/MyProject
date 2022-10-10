@@ -28,7 +28,7 @@ public class Hola {
         try {
             IProject newProject = new Temporary(LocalDate.of(2000, 1, 1), "United States", "My gringro project", 25000, 620,117960697);
             //IProject newProject = Temporary.getProjectByCode("PRY-0006");
-            ArrayList<IProject> projects = ProjectDAO.getAllTemporaryProjects();
+            ArrayList<IProject> projects = ProjectDAO.getAllProjects();
             System.out.println(projects.size());
         } catch (Exception e) {
             System.out.println(e.toString());

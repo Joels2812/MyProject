@@ -69,7 +69,6 @@ public class PersonController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("txtId"));
-        System.out.println(id);
         String surname =request.getParameter("txtSurname");
         String lastname = request.getParameter("txtLastname");
         String email = request.getParameter("txtEmail");

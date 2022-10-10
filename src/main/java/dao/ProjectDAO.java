@@ -71,7 +71,7 @@ public class ProjectDAO extends MySqlConfig{
             Project newProject = new Permanent(rs.getDouble("fixed_anual_cost"), rs.getDouble("inflation_percentage"), rs.getString("pro_name"), rs.getDouble("initial_cost"));
             newProject.setCode(rs.getString("code"));
             newProject.setAcumulatedIncome(rs.getDouble("acumulated_income"));
-            newProject.setStartDate(rs.getDate("pro-start_date").toLocalDate());
+            newProject.setStartDate(rs.getDate("pro_start_date").toLocalDate());
             newProject.setManager(PersonDAO.getPersonById(rs.getInt("manager")));
             IProject iNewProject = newProject;
             projects.add(iNewProject);

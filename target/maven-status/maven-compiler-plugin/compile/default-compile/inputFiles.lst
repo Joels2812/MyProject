@@ -1,6 +1,7 @@
 C:\Users\march\Documents\NetBeansProjects\MyProjectTekie\src\main\java\model\ProjectType.java
 C:\Users\march\Documents\NetBeansProjects\MyProjectTekie\src\main\java\model\Project.java
 C:\Users\march\Documents\NetBeansProjects\MyProjectTekie\src\main\java\model\IPerson.java
+C:\Users\march\Documents\NetBeansProjects\MyProjectTekie\src\main\java\controller\SQLException.java
 C:\Users\march\Documents\NetBeansProjects\MyProjectTekie\src\main\java\model\Permanent.java
 C:\Users\march\Documents\NetBeansProjects\MyProjectTekie\src\main\java\api\Hola.java
 C:\Users\march\Documents\NetBeansProjects\MyProjectTekie\src\main\java\dao\ProjectDAO.java
@@ -9,6 +10,7 @@ C:\Users\march\Documents\NetBeansProjects\MyProjectTekie\src\main\java\model\IPr
 C:\Users\march\Documents\NetBeansProjects\MyProjectTekie\src\main\java\model\SimpleProjectFactory.java
 C:\Users\march\Documents\NetBeansProjects\MyProjectTekie\src\main\java\model\Task.java
 C:\Users\march\Documents\NetBeansProjects\MyProjectTekie\src\main\java\model\Temporary.java
+C:\Users\march\Documents\NetBeansProjects\MyProjectTekie\src\main\java\controller\ProjectController.java
 C:\Users\march\Documents\NetBeansProjects\MyProjectTekie\src\main\java\dao\PersonDAO.java
 C:\Users\march\Documents\NetBeansProjects\MyProjectTekie\src\main\java\controller\PersonController.java
 C:\Users\march\Documents\NetBeansProjects\MyProjectTekie\src\main\java\controller\MainController.java
