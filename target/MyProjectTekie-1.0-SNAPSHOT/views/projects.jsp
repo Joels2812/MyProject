@@ -48,7 +48,7 @@
   <tbody>
       <%for(IProject project : projects){%>
     <tr>
-        <td><a href="#"><%= project.getCode()%></a></td>
+        <td><a href="ProjectController?action=open&proId=<%=project.getCode()%>&type=<%=project.type().getName()%>"><%= project.getCode()%></a></td>
       <td><%= project.getName()%></td>
       <td><%= project.getInitialCost()%></td>
       <td><%= project.getStartDate().toString()%></td>

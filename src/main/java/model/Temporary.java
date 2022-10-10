@@ -50,4 +50,10 @@ public class Temporary extends Project{
     public static IProject getProjectByCode(String code) throws SQLException{
             return ProjectDAO.getTemporaryProjectByCode(code);
     }
+
+    @Override
+    public ProjectType type() {
+        return ProjectType.TEMPORARY;
+    }
+    
 }

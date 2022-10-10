@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -100,6 +102,7 @@ public abstract class Project implements IProject,Comparable<Project>{
         this.manager = manager;
     }
     
+    @Override
     public boolean addTeamMember(IPerson member){
         if(!existMember(member)){
             teamMembers.add(member);
@@ -144,6 +147,11 @@ public abstract class Project implements IProject,Comparable<Project>{
     public void delete() throws SQLException {
         ProjectDAO.deleteProjectByCode(code);
     }
+    @Override
+    public ArrayList<IPerson> getTeamMembers() {
+        return teamMembers;
+    }
+    
     
     
     

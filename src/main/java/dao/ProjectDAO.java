@@ -12,8 +12,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import model.IPerson;
 import model.IProject;
 import model.Permanent;
+import model.Person;
 import model.Project;
 import model.Temporary;
 /**
@@ -119,6 +121,7 @@ public class ProjectDAO extends MySqlConfig{
             newProject.setCode(rs.getString("code"));
             newProject.setAcumulatedIncome(rs.getDouble("acumulated_income"));
             newProject.setStartDate(rs.getDate("pro_start_date").toLocalDate());
+            newProject.setManager(PersonDAO.getPersonById(rs.getInt("manager")));
             project = newProject;
             
         }
@@ -138,6 +141,7 @@ public class ProjectDAO extends MySqlConfig{
             newProject.setCode(rs.getString("code"));
             newProject.setAcumulatedIncome(rs.getDouble("acumulated_income"));
             newProject.setStartDate(rs.getDate("pro-start_date").toLocalDate());
+            newProject.setManager(PersonDAO.getPersonById(rs.getInt("manager")));
             project = newProject;
             
         }
@@ -157,6 +161,36 @@ public class ProjectDAO extends MySqlConfig{
         }finally{
             closeConnection();
         }
+    }
+    
+    public static void addTeamMember(int id,String code) throws SQLException{
+        try {
+            getConnection();
+            String sql = "{CALL add_team_member(?,?)}";
+            CallableStatement cs = con.prepareCall(sql);
+            cs.setInt("idMember", id);
+            cs.setString("pro_code", code);
+            cs.execute();
+        } catch (SQLException e) {
+            throw e;
+        }finally{
+            closeConnection();
+        }
+    }
+    
+    public static ArrayList<IPerson> getTeamMembersByProject(IProject project) throws SQLException{
+        ArrayList<IPerson> persons = new ArrayList<>();
+        getConnection();
+        String sql = "{CALL get_team_members_by_projectCode(?)}";
+        CallableStatement cs = con.prepareCall(sql);
+        cs.setString("pro_code", project.getCode());
+        ResultSet rs = cs.executeQuery();
+        while(rs.next()){
+            IPerson currentPerson = new Person(rs.getInt("id"), rs.getString("surname"), rs.getString("lastname"),rs.getString("email"), rs.getInt("phone_number"), rs.getDate("borndate").toLocalDate());
+            project.addTeamMember(currentPerson);
+        }
+        closeConnection();
+        return persons;
     }
     
 }

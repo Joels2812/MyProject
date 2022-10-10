@@ -12,6 +12,10 @@
         <servlet-name>ProjectController</servlet-name>
         <servlet-class>controller.ProjectController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TemporaryProjectController</servlet-name>
+        <servlet-class>controller.TemporaryProjectController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PersonController</servlet-name>
         <url-pattern>/PersonController</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>ProjectController</servlet-name>
         <url-pattern>/ProjectController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TemporaryProjectController</servlet-name>
+        <url-pattern>/TemporaryProjectController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

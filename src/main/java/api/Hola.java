@@ -26,10 +26,10 @@ import model.Temporary;
 public class Hola {
     public static void main(String[] args) {
         try {
-            IProject newProject = new Temporary(LocalDate.of(2000, 1, 1), "United States", "My gringro project", 25000, 620,117960697);
-            //IProject newProject = Temporary.getProjectByCode("PRY-0006");
-            ArrayList<IProject> projects = ProjectDAO.getAllProjects();
-            System.out.println(projects.size());
+            //IProject newProject = new Temporary(LocalDate.of(2000, 1, 1), "United States", "My gringro project", 25000, 620,117960697);
+            IProject newProject = Temporary.getProjectByCode("PRY-0009");
+            ProjectDAO.addTeamMember(117960697, "");
+           
         } catch (Exception e) {
             System.out.println(e.toString());
         }

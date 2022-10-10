@@ -18,6 +18,7 @@ public interface IProject {
     abstract public double getBalance();
     abstract public ArrayList<Task> listTasks();
     abstract public ArrayList<Event> getLog();
+    abstract public boolean addTeamMember(IPerson member);
     abstract public IPerson getManager();
     abstract public String getCode();
     abstract public String getName();
@@ -26,4 +27,6 @@ public interface IProject {
     abstract public double acumulatedIncome();
     abstract public void save() throws SQLException;
     abstract public void delete() throws SQLException;
+    abstract public ProjectType type();
+    abstract public ArrayList<IPerson> getTeamMembers();
 }

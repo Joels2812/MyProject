@@ -6,23 +6,31 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.IPerson;
 import model.IProject;
 import model.Permanent;
+import model.Person;
 import model.ProjectType;
 import model.Temporary;
-
+import model.Project;
 /**
  *
  * @author march
  */
 public class ProjectController extends HttpServlet {
-final String PROJECTS_PATH = "views/projects.jsp"; 
+    final String PROJECTS_PATH = "views/projects.jsp"; 
+    final String PERMANENT_PROJECTS_DETAIL_PATH = "views/permanentProjectDetail.jsp";
+    final String TEMPORARY_PROJECTS_DETAIL_PATH = "views/temporaryProjectDetail.jsp";
+    //final String INDEX_PATH = "index.jsp";
+    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -61,7 +69,32 @@ final String PROJECTS_PATH = "views/projects.jsp";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String requestAction = request.getParameter("action");
+        String url_redirect = "";
+        switch (requestAction) {
+            case "open":
+                String projectCode = request.getParameter("proId");
+                String projectType = request.getParameter("type");
+                IProject selectecProject = null;
+                try {
+                    if(projectType.equals(ProjectType.PERMANET.getName())){
+                        selectecProject = Permanent.getProjectByCode(projectCode);
+                        url_redirect = PERMANENT_PROJECTS_DETAIL_PATH;
+                        
+                    }else if(projectType.equals(ProjectType.TEMPORARY.getName())){
+                        selectecProject = Temporary.getProjectByCode(projectCode);
+                        url_redirect = TEMPORARY_PROJECTS_DETAIL_PATH;
+                    }
+                } catch (SQLException e) {
+                }
+                request.setAttribute("project", selectecProject);
+                break;
+            default:
+               url_redirect = PROJECTS_PATH;
+            
+        }
+        RequestDispatcher view = request.getRequestDispatcher(url_redirect);
+        view.forward(request, response);
     }
 
     /**

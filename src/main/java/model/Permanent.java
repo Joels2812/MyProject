@@ -35,5 +35,10 @@ public class Permanent extends Project{
     public static IProject getProjectByCode(String code) throws SQLException{
             return ProjectDAO.getPermanentProjectByCode(code);
     }
+
+    @Override
+    public ProjectType type() {
+        return ProjectType.PERMANET;
+    }
     
 }
